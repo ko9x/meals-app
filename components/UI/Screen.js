@@ -1,6 +1,10 @@
 import { StyleSheet, View } from "react-native";
 
-export default function Screen() {};
+export default function Screen(props) {
+    return (
+        <View style={styles.screen}>{props.children}</View>
+    )
+};
 
 const styles = StyleSheet.create({
     screen: {
