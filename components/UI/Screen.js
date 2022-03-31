@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 
 export default function Screen(props) {
     return (
-        <View style={styles.screen}>{props.children}</View>
+        <View style={{...props.style, ...styles.screen}}>{props.children}</View>
     )
 };
 
