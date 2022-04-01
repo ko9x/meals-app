@@ -7,6 +7,7 @@ import CategoriesScreen from "../screens/CategoriesScreen";
 import CategoryMealsScreen from "../screens/CategoryMealsScreen";
 import MealDetailScreen from "../screens/MealDetailScreen";
 import Favorites from "../screens/Favorites";
+import { Ionicons } from '@expo/vector-icons';
 
 const MealsNavigator = createStackNavigator(
   {
@@ -31,8 +32,23 @@ const MealsNavigator = createStackNavigator(
 );
 
 const TabNavigator = createBottomTabNavigator({
-    Meals: MealsNavigator,
-    Favorites: Favorites
+    Meals: {screen: MealsNavigator, navigationOptions: {
+        tabBarIcon: (tabInfo) => {
+            return <Ionicons name='ios-restaurant' size={30} color={tabInfo.tintColor} />
+        }
+    }},
+    Favorites: {
+        screen: Favorites,
+        navigationOptions: {
+            tabBarIcon: (tabInfo) => {
+                return <Ionicons name='ios-star' size={30} color={tabInfo.tintColor} />
+            }
+        }
+    }
+}, {
+    tabBarOptions: {
+        activeTintColor: Colors.secondary
+    }
 });
 
 export default createAppContainer(TabNavigator);
