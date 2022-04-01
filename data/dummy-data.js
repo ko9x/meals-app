@@ -74,7 +74,7 @@ export const MEALS = [
 
   new Meal(
     'm3',
-    ['c3'],
+    ['c3', 'c10'],
     'Classic Hamburger',
     'pricey',
     'simple',
