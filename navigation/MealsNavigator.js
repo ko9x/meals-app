@@ -17,7 +17,6 @@ const MealsNavigator = createStackNavigator(
           headerTitle: 'Meal Categories'
       }
     },
-
     CategoryMeals: CategoryMealsScreen,
     MealDetail: MealDetailScreen,
   },
