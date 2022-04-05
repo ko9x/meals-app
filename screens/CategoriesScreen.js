@@ -17,13 +17,18 @@ export default function CategoriesScreen(props) {
       <TouchableOpacity
         style={styles.gridItem}
         onPress={() => {
-          props.navigation.navigate({routeName: "CategoryMeals", params: {
-            categoryId: itemData.item.id
-          }});
+          props.navigation.navigate({
+            routeName: "CategoryMeals",
+            params: {
+              categoryId: itemData.item.id,
+            },
+          });
         }}
       >
-        <View style={{...styles.tile, backgroundColor: itemData.item.color}}>
-          <Text style={styles.title} numberOfLines={2}>{itemData.item.title}</Text>
+        <View style={{ ...styles.tile, backgroundColor: itemData.item.color }}>
+          <Text style={styles.title} numberOfLines={2}>
+            {itemData.item.title}
+          </Text>
         </View>
       </TouchableOpacity>
     );
@@ -37,21 +42,23 @@ export default function CategoriesScreen(props) {
       numColumns={2}
     />
   );
-};
-
-CategoriesScreen.navigationOptions = {
-  headerLeft: () => (
-    <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-      <Item
-        title="Menu"
-        iconName="ios-menu"
-        onPress={() => {
-          console.log("show menu");
-        }}
-      />
-    </HeaderButtons>
-  ),
 }
+
+CategoriesScreen.navigationOptions = (navData) => {
+  return {
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="Menu"
+          iconName="ios-menu"
+          onPress={() => {
+            navData.navigation.toggleDrawer();
+          }}
+        />
+      </HeaderButtons>
+    ),
+  };
+};
 
 const styles = StyleSheet.create({
   gridItem: {
@@ -62,18 +69,18 @@ const styles = StyleSheet.create({
   tile: {
     flex: 1,
     borderRadius: 10,
-    shadowColor: 'black',
+    shadowColor: "black",
     shadowOpacity: 0.26,
-    shadowOffset: { width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowRadius: 10,
     elevation: 3,
     padding: 15,
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end'
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
   },
   title: {
-    fontFamily: 'open-sans-bold',
+    fontFamily: "open-sans-bold",
     fontSize: 22,
-    textAlign: 'right',
-  }
+    textAlign: "right",
+  },
 });

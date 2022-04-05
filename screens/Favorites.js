@@ -11,16 +11,18 @@ export default function Favorites(props) {
   return <MealList meals={dummyArray} navigation={props.navigation} />;
 }
 
-Favorites.navigationOptions = {
-  headerTitle: "Your Favorites",
-  headerLeft: () =>
-      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-        <Item
-          title="menu"
-          iconName="ios-menu"
-          onPress={() => {
-            console.log("show menu");
-          }}
-        />
-      </HeaderButtons>
+Favorites.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Your Favorites",
+    headerLeft: () =>
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item
+            title="Menu"
+            iconName="ios-menu"
+            onPress={() => {
+              navData.navigation.toggleDrawer();
+            }}
+          />
+        </HeaderButtons>
+  }
 };
