@@ -1,12 +1,3 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  ImageBackground,
-} from "react-native";
-import Screen from "../components/UI/Screen";
 import { CATEGORIES, MEALS } from "../data/dummy-data";
 import MealList from "../components/MealList";
 
