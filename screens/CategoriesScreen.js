@@ -8,6 +8,8 @@ import {
 } from "react-native";
 import { displayName } from "react-native/Libraries/Text/TextAncestor";
 import { CATEGORIES } from "../data/dummy-data";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import CustomHeaderButton from "../components/HeaderButton";
 
 export default function CategoriesScreen(props) {
   const renderGridItem = (itemData) => {
@@ -36,6 +38,20 @@ export default function CategoriesScreen(props) {
     />
   );
 };
+
+CategoriesScreen.navigationOptions = {
+  headerLeft: () => (
+    <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+      <Item
+        title="Menu"
+        iconName="ios-menu"
+        onPress={() => {
+          console.log("show menu");
+        }}
+      />
+    </HeaderButtons>
+  ),
+}
 
 const styles = StyleSheet.create({
   gridItem: {

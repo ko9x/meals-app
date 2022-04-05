@@ -7,4 +7,8 @@ export default function FiltersScreen() {
     )
 };
 
+FiltersScreen.navigationOptions = {
+    headerTitle: 'Filter Meals'
+};
+
 const styles = StyleSheet.create({});
