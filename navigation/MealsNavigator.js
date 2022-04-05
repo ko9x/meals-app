@@ -15,6 +15,12 @@ const stackNavOptions = {
     headerStyle: {
       backgroundColor: Platform.OS === "android" ? Colors.primary : "",
     },
+    headerTitleStyle: {
+      fontFamily: 'open-sans-bold'
+    },
+    headerBackTitleStyle: {
+      fontFamily: 'open-sans'
+    },
     headerTintColor: Platform.OS === "android" ? "white" : Colors.primary,
 }
 
@@ -62,6 +68,7 @@ const TabNavigator = createBottomTabNavigator(
               name="ios-restaurant"
               size={30}
               color={tabInfo.tintColor}
+              style={{paddingTop: 5}}
             />
           );
         },
@@ -72,7 +79,7 @@ const TabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarIcon: (tabInfo) => {
           return (
-            <Ionicons name="ios-star" size={30} color={tabInfo.tintColor} />
+            <Ionicons name="ios-star" size={30} color={tabInfo.tintColor} style={{paddingTop: 5}} />
           );
         },
       },
@@ -80,14 +87,30 @@ const TabNavigator = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
+      labelStyle: {
+        fontFamily: 'open-sans-bold',
+        marginBottom: -10
+      },
       activeTintColor: Colors.secondary,
     },
   }
 );
 
 const MainNavigator = createDrawerNavigator({
-  TabNavigator: TabNavigator,
+  TabNavigator: {
+    screen: TabNavigator,
+    navigationOptions: {
+      drawerLabel: 'Meals'
+    }
+  },
   Filters: FilterNavigator
+}, {
+  contentOptions: {
+    activeTintColor: Colors.secondary,
+    labelStyle: {
+      fontFamily: 'open-sans'
+    }
+  }
 });
 
 export default createAppContainer(MainNavigator);
