@@ -1,18 +1,23 @@
+import { useLayoutEffect } from "react";
 import { StyleSheet, Image, ScrollView, View, Text } from "react-native";
 import Screen from "../components/UI/Screen";
-import { MEALS } from "../data/dummy-data";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/HeaderButton";
 import DefaultText from "../components/UI/DefaultText";
+import { useSelector } from "react-redux";
 
 export default function MealDetailScreen(props) {
-  const mealId = props.navigation.getParam("mealId");
 
-  const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+  const availableMeals = useSelector(state => state.meals.meals);
+
+  const mealId = props.navigation.getParam("mealId");
+  const mealTitle = props.navigation.getParam("mealTitle");
+
+  const selectedMeal = availableMeals.find((meal) => meal.id === mealId);
 
   const listItems = (arr) => {
     return arr.map((item) => (
-      <View style={styles.listItem}>
+      <View style={styles.listItem} key={item}>
         <DefaultText>{item}</DefaultText>
       </View>
     ));
@@ -42,11 +47,10 @@ export default function MealDetailScreen(props) {
 
 MealDetailScreen.navigationOptions = (navigationData) => {
   const mealId = navigationData.navigation.getParam("mealId");
-
-  const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+  const mealTitle = navigationData.navigation.getParam('mealTitle')
 
   return {
-    headerTitle: selectedMeal.title,
+    headerTitle: mealTitle,
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item

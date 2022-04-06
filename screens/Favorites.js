@@ -1,10 +1,12 @@
-import { MEALS } from "../data/dummy-data";
 import MealList from "../components/MealList";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/HeaderButton";
+import { useSelector } from "react-redux";
 
 export default function Favorites(props) {
-  const dummyArray = MEALS.filter(
+
+  const favoriteMeals = useSelector(state => state.meals.favoriteMeals)
+  const dummyArray = favoriteMeals.filter(
     (meal) => meal.id === "m1" || meal.id === "m2"
   );
 
