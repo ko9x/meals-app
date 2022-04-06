@@ -2,8 +2,6 @@ import { View, Text, Switch, Platform, StyleSheet } from "react-native";
 import Colors from "../constants/Colors";
 
 export default function FilterSwitch(props) {
-  console.log("props", props); //@DEBUG
-
   const toggleSwitch = (value) => {
     props.onSwitch(value);
   };
