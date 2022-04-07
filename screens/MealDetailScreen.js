@@ -8,8 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleFavorite } from "../store/actions/meals";
 
 export default function MealDetailScreen(props) {
-
-  const availableMeals = useSelector(state => state.meals.meals);
+  const availableMeals = useSelector((state) => state.meals.meals);
 
   const mealId = props.navigation.getParam("mealId");
   const mealTitle = props.navigation.getParam("mealTitle");
@@ -18,10 +17,10 @@ export default function MealDetailScreen(props) {
 
   const toggleFavoriteHandler = useCallback(() => {
     dispatch(toggleFavorite(mealId));
-  }, [dispatch, mealId])
+  }, [dispatch, mealId]);
 
   useEffect(() => {
-    props.navigation.setParams({toggleFavorite: toggleFavoriteHandler});
+    props.navigation.setParams({ toggleFavorite: toggleFavoriteHandler });
   }, [toggleFavoriteHandler]);
 
   const selectedMeal = availableMeals.find((meal) => meal.id === mealId);
@@ -58,19 +57,14 @@ export default function MealDetailScreen(props) {
 
 MealDetailScreen.navigationOptions = (navigationData) => {
   const mealId = navigationData.navigation.getParam("mealId");
-  const mealTitle = navigationData.navigation.getParam('mealTitle')
+  const mealTitle = navigationData.navigation.getParam("mealTitle");
+  const toggleFavorite = navigationData.navigation.getParam("toggleFavorite");
 
   return {
     headerTitle: mealTitle,
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-        <Item
-          title="favorite"
-          iconName="ios-star"
-          onPress={
-            navigationData.navigation.getParam('toggleFavorite')
-          }
-        />
+        <Item title="favorite" iconName="ios-star-outline" onPress={toggleFavorite} />
       </HeaderButtons>
     ),
   };
@@ -87,7 +81,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   detailsContainer: {
-    alignItems: 'center'
+    alignItems: "center",
   },
   details: {
     width: "80%",
