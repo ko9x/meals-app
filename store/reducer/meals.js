@@ -8,8 +8,6 @@ const initialState = {
 }
 
 const mealsReducer = (state = initialState, action) => {
-    console.log('hit reducer'); //@DEBUG
-    console.log('favs', state.favoriteMeals); //@DEBUG
     switch (action.type) {
         case TOGGLE_FAVORITE:
             const existingIndex = state.favoriteMeals.findIndex(meal => meal.id === action.mealId);
