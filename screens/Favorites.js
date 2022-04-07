@@ -6,11 +6,8 @@ import { useSelector } from "react-redux";
 export default function Favorites(props) {
 
   const favoriteMeals = useSelector(state => state.meals.favoriteMeals)
-  const dummyArray = favoriteMeals.filter(
-    (meal) => meal.id === "m1" || meal.id === "m2"
-  );
 
-  return <MealList meals={dummyArray} navigation={props.navigation} />;
+  return <MealList meals={favoriteMeals} navigation={props.navigation} />;
 }
 
 Favorites.navigationOptions = (navData) => {
