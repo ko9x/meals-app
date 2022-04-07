@@ -1,10 +1,11 @@
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useCallback } from "react";
 import { StyleSheet, Image, ScrollView, View, Text } from "react-native";
 import Screen from "../components/UI/Screen";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/HeaderButton";
 import DefaultText from "../components/UI/DefaultText";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleFavorite } from "../store/actions/meals";
 
 export default function MealDetailScreen(props) {
 
@@ -12,6 +13,16 @@ export default function MealDetailScreen(props) {
 
   const mealId = props.navigation.getParam("mealId");
   const mealTitle = props.navigation.getParam("mealTitle");
+
+  const dispatch = useDispatch();
+
+  const toggleFavoriteHandler = useCallback(() => {
+    dispatch(toggleFavorite(mealId));
+  }, [dispatch, mealId])
+
+  useEffect(() => {
+    props.navigation.setParams({toggleFavorite: toggleFavoriteHandler});
+  }, [toggleFavoriteHandler]);
 
   const selectedMeal = availableMeals.find((meal) => meal.id === mealId);
 
@@ -56,9 +67,9 @@ MealDetailScreen.navigationOptions = (navigationData) => {
         <Item
           title="favorite"
           iconName="ios-star"
-          onPress={() => {
-            console.log("add to favs");
-          }}
+          onPress={
+            navigationData.navigation.getParam('toggleFavorite')
+          }
         />
       </HeaderButtons>
     ),
