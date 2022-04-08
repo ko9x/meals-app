@@ -6,18 +6,23 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
+import { useEffect, useState } from "react";
 import Screen from "./UI/Screen";
 import DefaultText from "./UI/DefaultText";
+import { useSelector } from "react-redux";
 
 export default function MealList(props) {
+  const favoriteMeals = useSelector(state => state.meals.favoriteMeals);
+
   const renderMealItem = (itemData) => {
+    const isFavorite = Boolean(favoriteMeals.find(meal => meal.id === itemData.item.id));
     return (
       <View style={styles.mealItem}>
         <TouchableOpacity
           onPress={() => {
             props.navigation.navigate({
               routeName: "MealDetail",
-              params: { mealId: itemData.item.id, mealTitle: itemData.item.title },
+              params: { mealId: itemData.item.id, mealTitle: itemData.item.title, isFavorite: isFavorite},
             });
           }}
         >
