@@ -1,5 +1,5 @@
 import { MEALS } from '../../data/dummy-data';
-import { TOGGLE_FAVORITE } from '../actions/meals';
+import { TOGGLE_FAVORITE, SAVE_FILTERS } from '../actions/meals';
 
 const initialState = {
     meals: MEALS,
@@ -19,6 +19,15 @@ const mealsReducer = (state = initialState, action) => {
                 const newFavorite = state.meals.find(meal => meal.id === action.mealId);
                 return {...state, favoriteMeals: state.favoriteMeals.concat(newFavorite)};
             }
+        case SAVE_FILTERS: 
+            if (action.filters.glutenFree) {
+                const updatedFilteredMeals = state.meals.filter(meal => meal.isGlutenFree)
+                console.log('updat', updatedFilteredMeals); //@DEBUG
+                return {...state, filteredMeals: updatedFilteredMeals};
+            } else {
+                console.log('false', ); //@DEBUG
+            }
+            
         default: 
             return state;
     }
