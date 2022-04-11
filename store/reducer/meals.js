@@ -19,15 +19,24 @@ const mealsReducer = (state = initialState, action) => {
                 const newFavorite = state.meals.find(meal => meal.id === action.mealId);
                 return {...state, favoriteMeals: state.favoriteMeals.concat(newFavorite)};
             }
-        case SAVE_FILTERS: 
-            if (action.filters.glutenFree) {
-                const updatedFilteredMeals = state.meals.filter(meal => meal.isGlutenFree)
-                console.log('updat', updatedFilteredMeals); //@DEBUG
+        case SAVE_FILTERS:
+            const appliedFilters = action.filters;
+            const updatedFilteredMeals = state.meals.filter(meal => {
+                if (appliedFilters.glutenFree && !meal.isGlutenFree) {
+                    return false;
+                };
+                if (appliedFilters.lactoseFree && !meal.isLactoseFree) {
+                    return false;
+                };
+                if (appliedFilters.vegan && !meal.isVegan) {
+                    return false;
+                };
+                if (appliedFilters.vegetarian && !meal.isVegetarian) {
+                    return false;
+                }
+                return true;
+            });
                 return {...state, filteredMeals: updatedFilteredMeals};
-            } else {
-                console.log('false', ); //@DEBUG
-            }
-            
         default: 
             return state;
     }
