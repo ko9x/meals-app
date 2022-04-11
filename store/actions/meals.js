@@ -6,6 +6,5 @@ export const toggleFavorite = (id) => {
 };
 
 export const saveFilters = (filters) => {
-    console.log('filters actions', filters); //@DEBUG
     return { type: SAVE_FILTERS, filters: filters}
 };

@@ -35,9 +35,9 @@ export default function FiltersScreen(props) {
     <Screen style={styles.screen}>
       <Text style={styles.title}>Available Filters</Text>
       <FilterSwitch label={'Gluten-free'} value={isGlutenFree} onSwitch={setIsGlutenFree}/>
-      <FilterSwitch label={'Lactose-free'} value={isLactoseFree} onSwitch={setIsLactoseFree}/>
       <FilterSwitch label={'Vegan'} value={isVegan} onSwitch={setIsVegan}/>
       <FilterSwitch label={'Vegetarian'} value={isVegetarian} onSwitch={setIsVegetarian}/>
+      <FilterSwitch label={'Lactose-free'} value={isLactoseFree} onSwitch={setIsLactoseFree}/>
     </Screen>
   );
 }
